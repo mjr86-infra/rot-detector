@@ -2,9 +2,9 @@
   "name": "rot-detector",
   "version": "1.0.0",
   "description": "🧟 CLI tool to detect dependency rot in your projects - find abandoned, unmaintained dependencies",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "bin": {
-    "rot-detector": "./dist/index.js"
+    "rot-detector": "dist/index.cjs"
   },
   "files": [
     "dist",
